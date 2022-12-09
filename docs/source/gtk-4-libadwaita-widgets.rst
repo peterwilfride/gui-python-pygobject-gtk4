@@ -235,18 +235,18 @@ Adw ColorScheme
 Adw ComboRow
 ------------
 
-.. figure:: ../images/gtk4-libadwaita-widgets/gtk-4-pygobject-adw-comborow.webp
-   :alt: Python e GTK 4: PyGObject libadwaita Adw.ComboRow().
+.. figure:: ../images/gtk4-libadwaita-widgets/gtk-4-pygobject-adw-combo-row.webp
+   :alt: Python e GTK 4: PyGObject Gtk.ListBox() Adw.ComboRow().
 
-   Python e GTK 4: PyGObject libadwaita Adw.ComboRow().
+   Python e GTK 4: PyGObject Gtk.ListBox() Adw.ComboRow().
 
 .. tab:: Python
 
-    ..  literalinclude:: ../../src/gtk4-libadwaita-widgets/comborow/MainWindow.py
+    ..  literalinclude:: ../../src/gtk4-libadwaita-widgets/combo-row/MainWindow.py
 
 .. tab:: UI
 
-    ..  literalinclude:: ../../src/gtk4-libadwaita-widgets/comborow/ui/MainWindow.ui
+    ..  literalinclude:: ../../src/gtk4-libadwaita-widgets/combo-row/ui/MainWindow.ui
       :language: html
 
 --------------

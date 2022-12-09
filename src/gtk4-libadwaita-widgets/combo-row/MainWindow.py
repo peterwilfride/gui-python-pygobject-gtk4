@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Python e GTK 4: PyGObject libadwaita Adw.ComboRow() ui file."""
+"""Python e GTK 4: PyGObject Gtk.ListBox() Adw.ComboRow()."""
 
 import gi
 
@@ -12,11 +12,14 @@ Adw.init()
 
 
 class ExampleWindow(Gtk.ApplicationWindow):
+    items = ['Item 01', 'Item 02', 'Item 03', 'Item 04', 'Item 05']
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.set_title(title='Python e GTK 4: PyGObject libadwaita Adw.ComboRow()')
+        self.set_title(
+            title='Python e GTK 4: PyGObject Gtk.ListBox() Adw.ComboRow()'
+        )
         self.set_default_size(width=int(1366 / 2), height=int(768 / 2))
         self.set_size_request(width=int(1366 / 2), height=int(768 / 2))
 
@@ -38,31 +41,34 @@ class ExampleWindow(Gtk.ApplicationWindow):
         vbox.set_margin_start(margin=12)
         self.set_child(child=vbox)
 
-        model = Gtk.StringList.new(strings=['Item 01', 'Item 02', 'Item 03'])
+        self.listbox = Gtk.ListBox.new()
+        self.listbox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+        self.listbox.get_style_context().add_class(class_name='boxed-list')
+        vbox.append(child=self.listbox)
 
-        listbox = Gtk.ListBox.new()
-        listbox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
-        listbox.get_style_context().add_class(class_name='boxed-list')
-        vbox.append(child=listbox)
+        model = Gtk.StringList.new(strings=self.items)
 
-        adw_action_row_01 = Adw.ComboRow.new()
-        adw_action_row_01.set_icon_name(icon_name='edit-find-symbolic')
-        adw_action_row_01.set_title(title='Libadwaita')
-        adw_action_row_01.set_subtitle(subtitle='Adw.ComboRow()')
-        adw_action_row_01.set_model(model=model)
-        adw_action_row_01.connect('notify::selected', self.on_adw_combo_row_selected)
-        adw_action_row_01.connect('notify::selected-item', self.on_adw_combo_row_selected_item)
-        listbox.append(child=adw_action_row_01)
+        for n in range(1, 5):
+            icon = Gtk.Image.new_from_icon_name(
+                icon_name='accessories-text-editor-symbolic'
+            )
+
+            adw_combo_row = Adw.ComboRow.new()
+            adw_combo_row.set_title(title=f'Title {n}')
+            adw_combo_row.set_subtitle(subtitle='Adw.ComboRow()')
+            adw_combo_row.add_prefix(widget=icon)
+            adw_combo_row.set_model(model=model)
+            adw_combo_row.connect('notify::selected', self.on_adw_combo_row_selected)
+            adw_combo_row.connect('notify::selected-item', self.on_adw_combo_row_selected_item)
+            self.listbox.append(child=adw_combo_row)
 
     def on_adw_combo_row_selected(self, comborow, GParamUInt):
         print(f'Posição do item selecionado {comborow.get_selected()}')
-
         selected_item = comborow.get_selected_item()
         print(f'Texto do item selecionado {selected_item.get_string()}')
 
     def on_adw_combo_row_selected_item(self, comborow, GParamObject):
         print(f'Posição do item selecionado {comborow.get_selected()}')
-
         selected_item = comborow.get_selected_item()
         print(f'Texto do item selecionado {selected_item.get_string()}')
 

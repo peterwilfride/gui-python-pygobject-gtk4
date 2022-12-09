@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Python e GTK 4: PyGObject libadwaita Adw.ComboRow() ui file."""
+"""Python e GTK 4: PyGObject Gtk.ListBox() Adw.ComboRow().
+
+
+Blueprint ainda não consegue converter a tag <items> do `GtkStringList`.
+"""
 
 import subprocess
 import sys
@@ -17,16 +21,15 @@ Adw.init()
 BASE_DIR = Path(__file__).resolve().parent
 APPLICATION_WINDOW = str(BASE_DIR.joinpath('MainWindow.ui'))
 
-
 # Não utilizar no Gnome Builder. Configurar via meson.
 # [!] O Compilador Blueprint deve estar instalado [!].
-if sys.platform == 'linux':
-    for data in BASE_DIR.iterdir():
-        if data.is_file() and data.suffix == '.blp':
-            subprocess.run(
-                args=['blueprint-compiler', 'compile', f'{data}', '--output',
-                      f'{BASE_DIR.joinpath(data.stem)}.ui'],
-            )
+# if sys.platform == 'linux':
+#     for data in BASE_DIR.iterdir():
+#         if data.is_file() and data.suffix == '.blp':
+#             subprocess.run(
+#                 args=['blueprint-compiler', 'compile', f'{data}', '--output',
+#                       f'{BASE_DIR.joinpath(data.stem)}.ui'],
+#             )
 
 
 @Gtk.Template(filename=APPLICATION_WINDOW)
@@ -39,14 +42,12 @@ class ExampleWindow(Gtk.ApplicationWindow):
     @Gtk.Template.Callback()
     def on_adw_combo_row_selected(self, comborow, GParamUInt):
         print(f'Posição do item selecionado {comborow.get_selected()}')
-
         selected_item = comborow.get_selected_item()
         print(f'Texto do item selecionado {selected_item.get_string()}')
 
     @Gtk.Template.Callback()
     def on_adw_combo_row_selected_item(self, comborow, GParamObject):
         print(f'Posição do item selecionado {comborow.get_selected()}')
-
         selected_item = comborow.get_selected_item()
         print(f'Texto do item selecionado {selected_item.get_string()}')
 
