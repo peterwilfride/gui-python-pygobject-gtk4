@@ -1,0 +1,64 @@
+# -*- coding: utf-8 -*-
+"""Dialog edit task."""
+
+import gi
+
+gi.require_version(namespace='Gtk', version='4.0')
+gi.require_version(namespace='Adw', version='1')
+
+from gi.repository import Adw, Gtk
+
+Adw.init()
+
+
+class DialogEditTask(Gtk.Dialog):
+    def __init__(self, adw_combo_row, pk, **kwargs):
+        super().__init__(**kwargs)
+        self.set_title(title='Edit task')
+        self.set_default_size(width=600, height=300)
+
+        self.connect('response', self.dialog_response)
+
+        self.set_width = 600
+        self.set_height = 300
+
+        self.add_buttons(
+            '_Cancel', Gtk.ResponseType.CANCEL,
+            '_Update', Gtk.ResponseType.OK,
+        )
+
+        btn_ok = self.get_widget_for_response(
+            response_id=Gtk.ResponseType.OK,
+        )
+        btn_ok.get_style_context().add_class(class_name='suggested-action')
+
+        btn_cancel = self.get_widget_for_response(
+            response_id=Gtk.ResponseType.CANCEL,
+        )
+        btn_cancel.get_style_context().add_class(class_name='destructive-action')
+
+        # Accessing the dialog box.
+        content_area = self.get_content_area()
+        content_area.set_orientation(orientation=Gtk.Orientation.VERTICAL)
+        content_area.set_spacing(spacing=24)
+        content_area.set_margin_top(margin=12)
+        content_area.set_margin_end(margin=12)
+        content_area.set_margin_bottom(margin=12)
+        content_area.set_margin_start(margin=12)
+
+        label = Gtk.Label.new(str='Update task')
+        content_area.append(child=label)
+
+        self.entry = Gtk.Entry.new()
+        self.entry.set_text(text=adw_combo_row.get_subtitle())
+        content_area.append(child=self.entry)
+
+    def dialog_response(self, dialog, response):
+        if response == Gtk.ResponseType.OK:
+            print('update')
+        elif response == Gtk.ResponseType.CANCEL:
+            print('Botão CANCELAR pressionado')
+        dialog.close()
+
+    def get_entry_text(self):
+        return self.entry.get_text()
