@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Dialog delete task."""
+"""Dialog edit task."""
 
 import gi
 
