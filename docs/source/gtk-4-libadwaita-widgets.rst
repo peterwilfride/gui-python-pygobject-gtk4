@@ -358,6 +358,29 @@ Adw MessageDialog
 
 --------------
 
+Adw PasswordEntryRow
+--------------------
+
+.. figure:: ../images/gtk4-libadwaita-widgets/gtk-4-pygobject-adw-password-entry-row.webp
+   :alt: Python e GTK 4: PyGObject Adw.PasswordEntryRow().
+
+   Python e GTK 4: PyGObject Adw.PasswordEntryRow().
+
+.. tab:: Python
+
+    ..  literalinclude:: ../../src/gtk4-libadwaita-widgets/password-entry-row/MainWindow.py
+
+.. tab:: UI
+
+    ..  literalinclude:: ../../src/gtk4-libadwaita-widgets/password-entry-row/ui/MainWindow.ui
+      :language: html
+
+.. tab:: Blueprint
+
+    ..  literalinclude:: ../../src/gtk4-libadwaita-widgets/password-entry-row/ui/MainWindow.blp
+
+--------------
+
 Adw PreferencesPage
 -------------------
 
