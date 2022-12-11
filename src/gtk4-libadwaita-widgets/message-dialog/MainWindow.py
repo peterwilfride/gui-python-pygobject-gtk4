@@ -12,18 +12,24 @@ Adw.init()
 
 
 class Dialog(Adw.MessageDialog):
-    def __init__(self, parent):
-        super(Dialog, self).__init__(transient_for=parent)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
-        self.set_heading(heading='Adw.MessageDialog() - heading')
-        self.set_body(body='Adw.MessageDialog() - body')
+        self.set_heading(heading='Cabeçalho do dialogo')
+        self.set_body(body='Corpo da janela de dialogo, pode utilizar markup.')
         self.add_response(Gtk.ResponseType.CANCEL.value_nick, 'Cancelar')
+        self.set_response_appearance(
+            response=Gtk.ResponseType.CANCEL.value_nick,
+            appearance=Adw.ResponseAppearance.DESTRUCTIVE
+        )
         self.add_response(Gtk.ResponseType.OK.value_nick, 'OK')
+        self.set_response_appearance(
+            response=Gtk.ResponseType.OK.value_nick,
+            appearance=Adw.ResponseAppearance.SUGGESTED
+        )
         self.connect('response', self.dialog_response)
 
-        self.present()
-
-    def dialog_response(self, dialog, response, ):
+    def dialog_response(self, dialog, response):
         if response == Gtk.ResponseType.OK.value_nick:
             print('Botão OK pressionado')
         elif response == Gtk.ResponseType.CANCEL.value_nick:
@@ -35,7 +41,8 @@ class ExampleWindow(Gtk.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.set_title(title='Python e GTK 4: PyGObject libadwaita Adw.MessageDialog()')
+        self.set_title(
+            title='Python e GTK 4: PyGObject libadwaita Adw.MessageDialog()')
         self.set_default_size(width=int(1366 / 2), height=int(768 / 2))
         self.set_size_request(width=int(1366 / 2), height=int(768 / 2))
 
@@ -57,22 +64,31 @@ class ExampleWindow(Gtk.ApplicationWindow):
         vbox.set_margin_start(margin=12)
         self.set_child(child=vbox)
 
-        # Exibindo o ícone padrão.
         button = Gtk.Button.new_with_label(label='Clique aqui')
         button.connect('clicked', self.on_button_clicked)
         vbox.append(child=button)
 
     def on_button_clicked(self, button):
-        # Classe.
-        # dialog = Dialog(parent=self)
-
-        dialog = Adw.MessageDialog.new(parent=self)
-        dialog.set_heading(heading='Adw.MessageDialog() - heading')
-        dialog.set_body(body='Adw.MessageDialog() - body')
-        dialog.add_response(Gtk.ResponseType.CANCEL.value_nick, 'Cancelar')
-        dialog.add_response(Gtk.ResponseType.OK.value_nick, 'OK')
-        dialog.connect('response', self.dialog_response)
+        # Utilizando uma classe.
+        dialog = Dialog(transient_for=self)
         dialog.present()
+
+        # dialog = Adw.MessageDialog.new(parent=self)
+        # dialog.set_heading(heading='Cabeçalho do dialogo')
+        # dialog.set_body(
+        #     body='Corpo da janela de dialogo, pode utilizar markup.')
+        # dialog.add_response(Gtk.ResponseType.CANCEL.value_nick, 'Cancelar')
+        # dialog.set_response_appearance(
+        #     response=Gtk.ResponseType.CANCEL.value_nick,
+        #     appearance=Adw.ResponseAppearance.DESTRUCTIVE
+        # )
+        # dialog.add_response(Gtk.ResponseType.OK.value_nick, 'OK')
+        # dialog.set_response_appearance(
+        #     response=Gtk.ResponseType.OK.value_nick,
+        #     appearance=Adw.ResponseAppearance.SUGGESTED
+        # )
+        # dialog.connect('response', self.dialog_response)
+        # dialog.present()
 
     def dialog_response(self, dialog, response):
         if response == Gtk.ResponseType.OK.value_nick:

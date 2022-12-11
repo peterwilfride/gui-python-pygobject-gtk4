@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 """Python e GTK 4: PyGObject Gtk.ListBox() Adw.ComboRow().
 
-
-Blueprint ainda não consegue converter a tag <items> do `GtkStringList`.
+blueprint-compiler: `error: unsupported XML tag: <items>`.
 """
 
 import subprocess

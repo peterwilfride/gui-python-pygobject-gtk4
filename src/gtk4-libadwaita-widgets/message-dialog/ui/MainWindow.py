@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Python e GTK 4: PyGObject libadwaita Adw.MessageDialog() ui file."""
+"""Python e GTK 4: PyGObject libadwaita Adw.MessageDialog() ui file.
+
+blueprint-compiler: `error: unsupported XML tag: <responses>`.
+"""
 
 import subprocess
 import sys
@@ -20,13 +23,13 @@ APPLICATION_WINDOW = str(BASE_DIR.joinpath('MainWindow.ui'))
 
 # Não utilizar no Gnome Builder. Configurar via meson.
 # [!] O Compilador Blueprint deve estar instalado [!].
-if sys.platform == 'linux':
-    for data in BASE_DIR.iterdir():
-        if data.is_file() and data.suffix == '.blp':
-            subprocess.run(
-                args=['blueprint-compiler', 'compile', f'{data}', '--output',
-                      f'{BASE_DIR.joinpath(data.stem)}.ui'],
-            )
+# if sys.platform == 'linux':
+#     for data in BASE_DIR.iterdir():
+#         if data.is_file() and data.suffix == '.blp':
+#             subprocess.run(
+#                 args=['blueprint-compiler', 'compile', f'{data}', '--output',
+#                       f'{BASE_DIR.joinpath(data.stem)}.ui'],
+            # )
 
 
 @Gtk.Template(filename=APPLICATION_WINDOW)

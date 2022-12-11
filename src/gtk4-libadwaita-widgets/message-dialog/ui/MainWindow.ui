@@ -45,15 +45,14 @@
   </menu>
 
   <object class="AdwMessageDialog" id="dialog">
-    <property name="heading" translatable="yes">Adw.MessageDialog() - heading</property>
-    <property name="body" translatable="yes">Adw.MessageDialog() - body</property>
-    <property name="default-response">ok</property>
-    <property name="close-response">cancel</property>
+    <property name="heading" translatable="yes">Cabeçalho do dialogo</property>
+    <property name="body" translatable="yes">Corpo da janela de dialogo, pode utilizar markup.</property>
+    <property name="default-response">OK</property>
+    <property name="close-response">Cancelar</property>
     <signal name="response" handler="dialog_response"/>
     <responses>
-      <response id="cancel" translatable="yes" appearance="destructive">Cancel</response>
-      <response id="ok" translatable="yes" appearance="suggested">OK</response>
+      <response id="cancel" translatable="yes" appearance="destructive">_Cancelar</response>
+      <response id="ok" translatable="yes" appearance="suggested">_OK</response>
     </responses>
   </object>
-
 </interface>
